@@ -10,7 +10,6 @@ function main() {
     if ((e as KeyboardEvent).key === "Enter") {
       const childBlock = createChildBlock();
       initDiv.appendChild(childBlock);
-      // childBlock.getElementByClass("block-input").focus();
       const blockInputEl = childBlock.children[0] as HTMLElement;
       blockInputEl.focus();
       const targets = findChildBlock(initDiv);
