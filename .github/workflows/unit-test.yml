@@ -1,0 +1,48 @@
+name: Unit Test
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: |
+          yarn
+      - name: Type Check
+        run: |
+          yarn typecheck
+      - name: Unit Test
+        run: |
+          yarn test
+      - name: Collecting Code Coverage
+        uses: codecov/codecov-action@v3
+      - name: Production Build
+        run: |
+          CI=false yarn build
+      - name: if fail
+        uses: actions/github-script@v6.3.1
+        with:
+          github-token: ${{github.token}}
+          script: |
+            const ref = "${{github.ref}}"
+            const pull_number = Number(ref.split("/")[2])
+            await github.pulls.createReview({
+              ...context.repo,
+              pull_number,
+              body: "Check your test",
+              event: "REQUEST_CHANGES"
+            })
+        if: failure()
