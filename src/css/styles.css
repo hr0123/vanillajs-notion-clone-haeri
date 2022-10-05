@@ -1,9 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap");
+
 body {
-  text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
 }
-.heading {
-  font-size: 3rem;
-}
+
 .section-1 {
   width: 100%;
   height: auto;
@@ -11,4 +11,141 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.title [contenteditable="true"]:empty:not(:focus):before {
+  content: attr(placeholder);
+  -webkit-text-fill-color: rgba(55, 53, 47, 0.15);
+}
+
+.title {
+  margin: 2rem 0 0.5rem;
+  max-width: 600px;
+  width: 100%;
+  
+}
+.title-input {
+  width: 100%;
+  height: auto;
+  padding: 0.5rem 0.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  border: 0;
+  border-radius: 0.1em;
+  background-color: white;
+  color: rgb(55, 53, 47);
+  cursor: text;
+}
+
+.title-input:hover {
+  border: 0.5px;
+}
+.title-input:focus {
+  outline: none;
+  background-color: white;
+  border: 0.5px;
+}
+
+.block {
+  position: relative;
+  margin: 0.5rem 0 0.5rem;
+  max-width: 600px;
+  width: 100%;
+}
+
+.block [contenteditable="true"]:empty:not(:focus):before {
+  content: attr(placeholder);
+  -webkit-text-fill-color: rgba(55, 53, 47, 0.75);
+}
+
+.block-input {
+  width: 100%;
+  height: auto;
+  padding: 0.5rem 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 0;
+  border-radius: 0.1em;
+  background-color: white;
+  white-space: pre-wrap;
+}
+.block-input:hover {
+  border: 0.5px;
+}
+/* .block:hover:before {
+  content: "+";
+} */
+.block-input:focus {
+  outline: none;
+  border: 0.5px;
+}
+
+.block-input::selection {
+  background: rgba(165, 214, 167, 0.25);
+}
+
+.heading1 {
+  font-size: 30px;
+  color: black;
+}
+.heading2 {
+  font-size: 20px;
+  color: rgb(12, 11, 10);
+}
+.heading3 {
+  font-size: 18px;
+  color: rgb(12, 11, 10);
+}
+
+.text {
+  font-size: 16px;
+  color: rgb(12, 11, 10);
+}
+
+.item {
+  display: list-item;
+  margin-left: 1em;
+  color: rgb(12, 11, 10);
+}
+
+.menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 40vh;
+  border-radius: 4px;
+  width: 324px;
+  max-width: calc(100vw - 24px);
+  min-width: 180px;
+  box-shadow: rgb(15 15 15 / 5%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 3px 6px, rgb(15 15 15 / 20%) 0px 9px 24px;
+}
+
+.menu_list {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+.menu_list .header {
+  display: flex;
+  padding-left: 14px;
+  padding-right: 14px;
+  margin-top: 6px;
+  margin-bottom: 8px;
+  color: rgba(55, 53, 47, 0.65);
+  font-size: 11px;
+  font-weight: 500;
+  user-select: none;
+  text-transform: uppercase;
+}
+.notion-focusable {
+  user-select: none;
+  transition: background 20ms ease-in 0s;
+  cursor: pointer;
+  width: calc(100% - 8px);
+  margin-left: 4px;
+  margin-right: 4px;
+  border-radius: 3px;
+}
+.notion-focusable:hover {
+  background: rgba(55, 53, 47, 0.08);
 }
