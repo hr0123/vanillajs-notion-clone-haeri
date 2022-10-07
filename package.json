@@ -1,5 +1,5 @@
 {
-  "name": "vanilajs-notion-clone",
+  "name": "vanillajs-notion-clone",
   "version": "1.0.0",
   "description": "",
   "main": "./index.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:eunchurn/vanilajs-notion-clone.git"
+    "url": "git@github.com:eunchurn/vanilajs-notion-clone"
   },
   "keywords": [],
   "author": "Eunchurn Park <eunchurn.park@gmail.com> (https://github.com/eunchurn)",

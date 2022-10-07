@@ -34,7 +34,7 @@ export default {
     watchFiles: [path.join(src, "**/*.{js,jsx,ts,tsx}"), `!${path.join(src, "**/*test.{js,jsx,ts,tsx}")}`],
   },
   deploy: {
-    remoteUrl: "https://github.com/eunchurn/vanillajs-typescript-gulp-project-boilerplate.git",
+    remoteUrl: "https://github.com/eunchurn/vanillajs-notion-clone",
     origin: "origin",
     deployBranch: "gh-pages"
   }
