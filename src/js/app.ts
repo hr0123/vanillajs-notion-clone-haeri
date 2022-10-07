@@ -36,7 +36,6 @@ function createChildBlock() {
   const menu = document.createElement("div");
   menu.setAttribute("class", "menu");
   const handleClick = (selectedStyle: ListStyle) => {
-    console.log(selectedStyle)
     switch (selectedStyle) {
       case ListStyle.heading1: {
         textContainer.removeAttribute("class");

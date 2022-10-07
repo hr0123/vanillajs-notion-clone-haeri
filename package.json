@@ -1,5 +1,5 @@
 {
-  "name": "vanillajs-typescript-gulp-project-boilerplate",
+  "name": "vanilajs-notion-clone",
   "version": "1.0.0",
   "description": "",
   "main": "./index.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:eunchurn/vanillajs-typescript-gulp-project-boilerplate.git"
+    "url": "git@github.com:eunchurn/vanilajs-notion-clone.git"
   },
   "keywords": [],
   "author": "Eunchurn Park <eunchurn.park@gmail.com> (https://github.com/eunchurn)",
