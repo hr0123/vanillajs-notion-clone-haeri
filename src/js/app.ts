@@ -12,10 +12,28 @@ function main() {
       initDiv.appendChild(childBlock);
       const blockInputEl = childBlock.children[0] as HTMLElement;
       blockInputEl.focus();
+
       const targets = findChildBlock(initDiv);
       initDiv.ondrop = dropping(initDiv, targets);
       e.preventDefault();
     }
+    // 아래 화살표
+    if((e as KeyboardEvent).key === "ArrowDown") {
+      // 1. childBlock들의 id로 배열 만들어
+      const blockIdArr = new Array(childBlock.getAttribute("id"));
+      // 2. 그 배열에서, 현재 포커스의 id의 인덱스값 확인 후
+      const currentId = document.activeElement?.getAttribute("id")
+      // const currentIndex = blockIdArr.indexOf(currentId);
+      // 3. +1인덱스 요소로 포커스 이동
+      // currentIndex+1.focus();
+      console.log("ARROW DOWN!", blockIdArr, currentId);
+
+    }
+    // 위 화살표: 현재 포커스의 id의 인덱스보다 -1인덱스 요소로 포커스 이동
+    if((e as KeyboardEvent).key === "ArrowUp") {
+      console.log("ARROW UP!")
+    }
+
   });
   const targets = findChildBlock(initDiv);
   initDiv.ondrop = dropping(initDiv, targets);
@@ -26,15 +44,19 @@ function createChildBlock() {
   const blockId = randomBytes(8).toString("hex");
   childBlock.setAttribute("id", blockId);
   childBlock.setAttribute("draggable", "true");
+
   const menuContainer = document.createElement("div");
+
   const textContainer = document.createElement("div");
   textContainer.setAttribute("placeholder", "Type '/' for commands");
   textContainer.setAttribute("contenteditable", "true");
   textContainer.setAttribute("class", "block-input");
   textContainer.setAttribute("id", blockId);
   textContainer.setAttribute("draggable", "false");
+
   const menu = document.createElement("div");
   menu.setAttribute("class", "menu");
+
   const handleClick = (selectedStyle: ListStyle) => {
     switch (selectedStyle) {
       case ListStyle.heading1: {
@@ -69,19 +91,22 @@ function createChildBlock() {
         break;
       }
     }
+    //menu안뜨게
     const innerMenuEl = menuContainer.getElementsByClassName("menu");
     if (!innerMenuEl) return;
     if (innerMenuEl.length === 0) return;
-    menuContainer.removeChild(menu);
+    menuContainer.removeChild(menu); 
   };
+
   menuItems(menu, handleClick);
   childBlock.addEventListener("keydown", (e: Event) => {
     if ((e as KeyboardEvent).key === "/") {
-      menuContainer.appendChild(menu);
+      menuContainer.appendChild(menu); //menu뜨게
     } else {
+      //menu안뜨게
       const innerMenuEl = menuContainer.getElementsByClassName("menu");
       if (innerMenuEl.length === 0) return;
-      menuContainer.removeChild(menu);
+      menuContainer.removeChild(menu); 
     }
   });
   childBlock.appendChild(textContainer);
@@ -109,8 +134,8 @@ function handleStartDraggingEvent(ev: DragEvent) {
   dataTransfer.setData("text/plain", target.id);
 }
 function handleDraggingEnterEvent(ev: DragEvent) {
-  const target = ev.target as HTMLElement;
-  if (target.id === ev.dataTransfer!.getData("text/plain")) {
+  const target = ev.target as HTMLElement; //target: drag중인 요소
+  if (target.id === ev.dataTransfer!.getData("text/plain")) { //dataTransfer: drag중인 요소가 호버중인 대상
     return;
   }
 }
