@@ -12,31 +12,31 @@ export function menuItems(element: HTMLDivElement, handleClick: OnClick) {
   const listItems: ItemProp[] = [
     {
       type: ListStyle.text,
-      imgSrc: "/public/images/text.png",
+      imgSrc: "public/images/text.png",
       content: "Just start writing with plain text.",
       onclick: () => handleClick(ListStyle.text),
     },
     {
       type: ListStyle.heading1,
-      imgSrc: "/public/images/h1.png",
+      imgSrc: "public/images/h1.png",
       content: "Big section heading.",
       onclick: () => handleClick(ListStyle.heading1),
     },
     {
       type: ListStyle.heading2,
-      imgSrc: "/public/images/h2.png",
+      imgSrc: "public/images/h2.png",
       content: "Medium section heading.",
       onclick: () => handleClick(ListStyle.heading2),
     },
     {
       type: ListStyle.heading3,
-      imgSrc: "/public/images/h3.png",
+      imgSrc: "public/images/h3.png",
       content: "Small section heading.",
       onclick: () => handleClick(ListStyle.heading3),
     },
     {
       type: ListStyle.item,
-      imgSrc: "/public/images/item.png",
+      imgSrc: "public/images/item.png",
       content: "Create a simple bulleted list.",
       onclick: () => handleClick(ListStyle.item),
     },
