@@ -30,7 +30,7 @@ export function menuItems(element: HTMLDivElement, handleClick: OnClick) {
     },
     {
       type: ListStyle.heading3,
-      imgSrc: "/public/images/h2.png",
+      imgSrc: "/public/images/h3.png",
       content: "Small section heading.",
       onclick: () => handleClick(ListStyle.heading3),
     },

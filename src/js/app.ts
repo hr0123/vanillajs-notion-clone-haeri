@@ -1,5 +1,5 @@
 import { menuItems, ListStyle } from "./menuItems";
-import crypto from "crypto";
+import { randomBytes } from "crypto";
 
 function main() {
   const initDiv = document.getElementById("initial");
@@ -23,7 +23,7 @@ function main() {
 
 function createChildBlock() {
   const childBlock = document.createElement("div");
-  const blockId = crypto.randomBytes(8).toString("hex");
+  const blockId = randomBytes(8).toString("hex");
   childBlock.setAttribute("id", blockId);
   childBlock.setAttribute("draggable", "true");
   const menuContainer = document.createElement("div");
@@ -36,6 +36,7 @@ function createChildBlock() {
   const menu = document.createElement("div");
   menu.setAttribute("class", "menu");
   const handleClick = (selectedStyle: ListStyle) => {
+    console.log(selectedStyle)
     switch (selectedStyle) {
       case ListStyle.heading1: {
         textContainer.removeAttribute("class");
