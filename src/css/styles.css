@@ -22,12 +22,32 @@ body {
   margin: 2rem 0 0.5rem;
   max-width: 600px;
   width: 100%;
-  
+  /* position: relative;
+  z-index: 0; */
 }
+
+.title-optionBlock {
+  position:absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.title-option {
+  /* position:absolute;
+  z-index: 1; */
+  color: rgba(55, 53, 47, 0.5);
+  padding-right: 8px;
+  font-size: 14px;
+}
+
 .title-input {
   width: 100%;
   height: auto;
-  padding: 0.5rem 0.5rem;
+  /* padding: 0.5rem 0.5rem; */
+  margin-top: 40px;
   font-size: 2rem;
   font-weight: 700;
   border: 0;

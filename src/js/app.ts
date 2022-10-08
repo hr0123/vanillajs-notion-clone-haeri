@@ -2,6 +2,10 @@ import { menuItems, ListStyle } from "./menuItems";
 import { randomBytes } from "crypto";
 
 function main() {
+  const title = document.getElementsByClassName("title-input");
+  title[0]?.addEventListener("mouseover", showTitleOptions);
+  // title[0]?.addEventListener("mouseleave", hideTitleOptions);
+
   const initDiv = document.getElementById("initial");
   if (!initDiv) return;
   const childBlock = createChildBlock();
@@ -18,25 +22,50 @@ function main() {
       e.preventDefault();
     }
     // 아래 화살표
-    if((e as KeyboardEvent).key === "ArrowDown") {
+    if ((e as KeyboardEvent).key === "ArrowDown") {
       // 1. childBlock들의 id로 배열 만들어
       const blockIdArr = new Array(childBlock.getAttribute("id"));
       // 2. 그 배열에서, 현재 포커스의 id의 인덱스값 확인 후
-      const currentId = document.activeElement?.getAttribute("id")
+      const currentId = document.activeElement?.getAttribute("id");
       // const currentIndex = blockIdArr.indexOf(currentId);
       // 3. +1인덱스 요소로 포커스 이동
       // currentIndex+1.focus();
       console.log("ARROW DOWN!", blockIdArr, currentId);
-
     }
     // 위 화살표: 현재 포커스의 id의 인덱스보다 -1인덱스 요소로 포커스 이동
-    if((e as KeyboardEvent).key === "ArrowUp") {
-      console.log("ARROW UP!")
+    if ((e as KeyboardEvent).key === "ArrowUp") {
+      console.log("ARROW UP!");
     }
-
   });
   const targets = findChildBlock(initDiv);
   initDiv.ondrop = dropping(initDiv, targets);
+}
+
+function showTitleOptions() {
+  const titleOptionBlock = document.getElementsByClassName("title-optionBlock");
+  console.log("TITLE HOVER!", titleOptionBlock[0].children.length);
+  if (titleOptionBlock[0].children.length > 0) return;
+  const addIconButton = document.createElement("div");
+  addIconButton.setAttribute("class", "title-option");
+  addIconButton.innerText = "Add icon";
+  const addCoverButton = document.createElement("div");
+  addCoverButton.setAttribute("class", "title-option");
+  addCoverButton.innerText = "Add cover";
+  const addCommentButton = document.createElement("div");
+  addCommentButton.setAttribute("class", "title-option");
+  addCommentButton.innerText = "Add comment";
+  titleOptionBlock[0].appendChild(addIconButton);
+  titleOptionBlock[0].appendChild(addCoverButton);
+  titleOptionBlock[0].appendChild(addCommentButton);
+  const title = document.getElementsByClassName("title");
+  title[0]?.addEventListener("mouseleave", () => {
+    titleOptionBlock[0].removeChild(addIconButton);
+    titleOptionBlock[0].removeChild(addCoverButton);
+    titleOptionBlock[0].removeChild(addCommentButton);
+    // addIconButton.remove;
+    // addCoverButton.remove;
+    // addCommentButton.remove;
+  });
 }
 
 function createChildBlock() {
@@ -95,7 +124,7 @@ function createChildBlock() {
     const innerMenuEl = menuContainer.getElementsByClassName("menu");
     if (!innerMenuEl) return;
     if (innerMenuEl.length === 0) return;
-    menuContainer.removeChild(menu); 
+    menuContainer.removeChild(menu);
   };
 
   menuItems(menu, handleClick);
@@ -106,7 +135,7 @@ function createChildBlock() {
       //menu안뜨게
       const innerMenuEl = menuContainer.getElementsByClassName("menu");
       if (innerMenuEl.length === 0) return;
-      menuContainer.removeChild(menu); 
+      menuContainer.removeChild(menu);
     }
   });
   childBlock.appendChild(textContainer);
@@ -135,7 +164,8 @@ function handleStartDraggingEvent(ev: DragEvent) {
 }
 function handleDraggingEnterEvent(ev: DragEvent) {
   const target = ev.target as HTMLElement; //target: drag중인 요소
-  if (target.id === ev.dataTransfer!.getData("text/plain")) { //dataTransfer: drag중인 요소가 호버중인 대상
+  if (target.id === ev.dataTransfer!.getData("text/plain")) {
+    //dataTransfer: drag중인 요소가 호버중인 대상
     return;
   }
 }
