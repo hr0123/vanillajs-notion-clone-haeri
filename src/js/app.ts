@@ -8,12 +8,37 @@ function main() {
   const initDiv = document.getElementById("initial");
   if (!initDiv) return;
   const childBlock = createChildBlock();
-  childBlock.addEventListener("mouseover", showDragIcon);
+
+  childBlock.addEventListener("mouseover", () => {
+    console.log(childBlock.children.length);
+    const dragIcon = document.createElement("img");
+    if(childBlock.children.length > 2 ) return;
+    dragIcon.setAttribute("class", "drag-icon");
+    dragIcon.setAttribute("src", "/public/images/drag.png");
+    childBlock.appendChild(dragIcon);
+    childBlock.addEventListener("mouseleave", () => {
+      console.log("hide drag icon");
+      childBlock.removeChild(dragIcon);
+    });
+  });
+
   initDiv?.appendChild(childBlock);
   initDiv?.addEventListener("keydown", (e: Event) => {
     if ((e as KeyboardEvent).key === "Enter") {
       const childBlock = createChildBlock();
-      childBlock.addEventListener("mouseover", showDragIcon);
+
+      childBlock.addEventListener("mouseover", () => {
+        console.log("show drag icon");
+        const dragIcon = document.createElement("div");
+        // if(!dragIcon) return;
+        dragIcon.setAttribute("class", "drag-icon");
+        childBlock.appendChild(dragIcon);
+        childBlock.addEventListener("mouseleave", () => {
+          console.log("hide drag icon");
+          childBlock.removeChild(dragIcon);
+        });
+      });
+
       initDiv.appendChild(childBlock);
       const blockInputEl = childBlock.children[0] as HTMLElement;
       blockInputEl.focus();
@@ -64,20 +89,6 @@ function showTitleOptions() {
     titleOptionBlock[0].removeChild(addIconButton);
     titleOptionBlock[0].removeChild(addCoverButton);
     titleOptionBlock[0].removeChild(addCommentButton);
-    // addIconButton.remove;
-    // addCoverButton.remove;
-    // addCommentButton.remove;
-  });
-}
-
-function showDragIcon() {
-  const dragIcon = document.createElement("div");
-  // if(!dragIcon) return;
-  dragIcon.setAttribute("class", "drag-icon");
-  const childBlock = createChildBlock();
-  childBlock.appendChild(dragIcon);
-  childBlock.addEventListener("mouseleave", () => {
-    childBlock.removeChild(dragIcon);
   });
 }
 

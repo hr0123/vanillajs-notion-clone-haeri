@@ -27,7 +27,7 @@ body {
 }
 
 .title-optionBlock {
-  position:absolute;
+  position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -41,6 +41,7 @@ body {
   color: rgba(55, 53, 47, 0.5);
   padding-right: 8px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .title-input {
@@ -67,11 +68,12 @@ body {
 }
 
 .drag-icon {
-  background-color: red;
+  /* background-color: blue; */
   width: 20px;
   height: 20px;
   position: relative;
-  left: 20;
+  right: 17px;
+  bottom: 25px;
 }
 
 .block {
