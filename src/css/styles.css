@@ -66,6 +66,14 @@ body {
   border: 0.5px;
 }
 
+.drag-icon {
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  left: 20;
+}
+
 .block {
   position: relative;
   margin: 0.5rem 0 0.5rem;

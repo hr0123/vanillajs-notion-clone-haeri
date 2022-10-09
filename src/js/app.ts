@@ -4,24 +4,26 @@ import { randomBytes } from "crypto";
 function main() {
   const title = document.getElementsByClassName("title-input");
   title[0]?.addEventListener("mouseover", showTitleOptions);
-  // title[0]?.addEventListener("mouseleave", hideTitleOptions);
 
   const initDiv = document.getElementById("initial");
   if (!initDiv) return;
   const childBlock = createChildBlock();
+  childBlock.addEventListener("mouseover", showDragIcon);
   initDiv?.appendChild(childBlock);
   initDiv?.addEventListener("keydown", (e: Event) => {
     if ((e as KeyboardEvent).key === "Enter") {
       const childBlock = createChildBlock();
+      childBlock.addEventListener("mouseover", showDragIcon);
       initDiv.appendChild(childBlock);
       const blockInputEl = childBlock.children[0] as HTMLElement;
       blockInputEl.focus();
 
+      // 방향키
       const targets = findChildBlock(initDiv);
       initDiv.ondrop = dropping(initDiv, targets);
       e.preventDefault();
     }
-    // 아래 화살표
+    // 아래 방향키
     if ((e as KeyboardEvent).key === "ArrowDown") {
       // 1. childBlock들의 id로 배열 만들어
       const blockIdArr = new Array(childBlock.getAttribute("id"));
@@ -65,6 +67,17 @@ function showTitleOptions() {
     // addIconButton.remove;
     // addCoverButton.remove;
     // addCommentButton.remove;
+  });
+}
+
+function showDragIcon() {
+  const dragIcon = document.createElement("div");
+  // if(!dragIcon) return;
+  dragIcon.setAttribute("class", "drag-icon");
+  const childBlock = createChildBlock();
+  childBlock.appendChild(dragIcon);
+  childBlock.addEventListener("mouseleave", () => {
+    childBlock.removeChild(dragIcon);
   });
 }
 
