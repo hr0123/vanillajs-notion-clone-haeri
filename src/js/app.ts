@@ -12,13 +12,16 @@ function main() {
   childBlock.addEventListener("mouseover", () => {
     console.log(childBlock.children.length);
     const dragIcon = document.createElement("img");
-    if(childBlock.children.length > 2 ) return;
+    if (childBlock.children.length > 2) return;
     dragIcon.setAttribute("class", "drag-icon");
     dragIcon.setAttribute("src", "/public/images/drag.png");
     childBlock.appendChild(dragIcon);
     childBlock.addEventListener("mouseleave", () => {
       console.log("hide drag icon");
       childBlock.removeChild(dragIcon);
+    });
+    dragIcon.addEventListener("click", () => {
+      console.log("DRAG START!!");
     });
   });
 
@@ -28,22 +31,24 @@ function main() {
       const childBlock = createChildBlock();
 
       childBlock.addEventListener("mouseover", () => {
-        console.log("show drag icon");
-        const dragIcon = document.createElement("div");
-        // if(!dragIcon) return;
+        console.log(childBlock.children.length);
+        const dragIcon = document.createElement("img");
+        if (childBlock.children.length > 2) return;
         dragIcon.setAttribute("class", "drag-icon");
+        dragIcon.setAttribute("src", "/public/images/drag.png");
         childBlock.appendChild(dragIcon);
         childBlock.addEventListener("mouseleave", () => {
           console.log("hide drag icon");
           childBlock.removeChild(dragIcon);
+        });
+        dragIcon.addEventListener("click", () => {
+          console.log("DRAG START!!");
         });
       });
 
       initDiv.appendChild(childBlock);
       const blockInputEl = childBlock.children[0] as HTMLElement;
       blockInputEl.focus();
-
-      // 방향키
       const targets = findChildBlock(initDiv);
       initDiv.ondrop = dropping(initDiv, targets);
       e.preventDefault();

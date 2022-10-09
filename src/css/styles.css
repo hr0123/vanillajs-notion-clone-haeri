@@ -74,6 +74,7 @@ body {
   position: relative;
   right: 17px;
   bottom: 25px;
+  cursor: pointer;
 }
 
 .block {
