@@ -192,10 +192,13 @@ function handleDraggingEnterEvent(ev: DragEvent) {
     //dataTransfer: drag중인 요소가 호버중인 대상
     return;
   }
+  target.parentElement?.setAttribute("style", "border-bottom: 3px solid rgba(35, 131, 226, 0.28)");
 }
 
 function handleDraggingOverEvent(ev: DragEvent) {
   ev.preventDefault();
+  const dragover = ev.target as HTMLElement;
+  dragover.setAttribute("style", "border: none");
 }
 
 function dropping(initDiv: HTMLElement, targets: DragTarget[]) {
@@ -213,6 +216,7 @@ function dropping(initDiv: HTMLElement, targets: DragTarget[]) {
     dragged.index = droppedIndex;
     updateElements(initDiv, targets);
     ev.preventDefault();
+    target.parentElement?.setAttribute("style", "border: none");
   };
 }
 interface DragTarget {

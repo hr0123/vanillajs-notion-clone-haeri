@@ -68,12 +68,12 @@ body {
 }
 
 .drag-icon {
-  /* background-color: blue; */
   width: 20px;
   height: 20px;
+  /* position: relative; */
   position: relative;
   right: 17px;
-  bottom: 25px;
+  bottom: 26px;
   cursor: pointer;
 }
 
