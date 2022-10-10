@@ -8,45 +8,39 @@ function main() {
   const initDiv = document.getElementById("initial");
   if (!initDiv) return;
   const childBlock = createChildBlock();
+  initDiv?.appendChild(childBlock);
 
   childBlock.addEventListener("mouseover", () => {
-    console.log(childBlock.children.length);
+    // console.log(childBlock.children.length);
     const dragIcon = document.createElement("img");
     if (childBlock.children.length > 2) return;
     dragIcon.setAttribute("class", "drag-icon");
     dragIcon.setAttribute("src", "/public/images/drag.png");
+    dragIcon.setAttribute("draggable", "true");
     childBlock.appendChild(dragIcon);
     childBlock.addEventListener("mouseleave", () => {
-      console.log("hide drag icon");
       childBlock.removeChild(dragIcon);
-    });
-    dragIcon.addEventListener("click", () => {
-      console.log("DRAG START!!");
     });
   });
 
-  initDiv?.appendChild(childBlock);
   initDiv?.addEventListener("keydown", (e: Event) => {
     if ((e as KeyboardEvent).key === "Enter") {
       const childBlock = createChildBlock();
+      initDiv.appendChild(childBlock);
 
       childBlock.addEventListener("mouseover", () => {
-        console.log(childBlock.children.length);
+        // console.log(childBlock.children.length);
         const dragIcon = document.createElement("img");
         if (childBlock.children.length > 2) return;
         dragIcon.setAttribute("class", "drag-icon");
         dragIcon.setAttribute("src", "/public/images/drag.png");
+        dragIcon.setAttribute("draggable", "true");
         childBlock.appendChild(dragIcon);
         childBlock.addEventListener("mouseleave", () => {
-          console.log("hide drag icon");
           childBlock.removeChild(dragIcon);
-        });
-        dragIcon.addEventListener("click", () => {
-          console.log("DRAG START!!");
         });
       });
 
-      initDiv.appendChild(childBlock);
       const blockInputEl = childBlock.children[0] as HTMLElement;
       blockInputEl.focus();
       const targets = findChildBlock(initDiv);
@@ -64,7 +58,7 @@ function main() {
       // currentIndex+1.focus();
       console.log("ARROW DOWN!", blockIdArr, currentId);
     }
-    // 위 화살표: 현재 포커스의 id의 인덱스보다 -1인덱스 요소로 포커스 이동
+    // 위 방향키: 현재 포커스의 id의 인덱스보다 -1인덱스 요소로 포커스 이동
     if ((e as KeyboardEvent).key === "ArrowUp") {
       console.log("ARROW UP!");
     }
@@ -75,7 +69,7 @@ function main() {
 
 function showTitleOptions() {
   const titleOptionBlock = document.getElementsByClassName("title-optionBlock");
-  console.log("TITLE HOVER!", titleOptionBlock[0].children.length);
+  // console.log("TITLE HOVER!", titleOptionBlock[0].children.length);
   if (titleOptionBlock[0].children.length > 0) return;
   const addIconButton = document.createElement("div");
   addIconButton.setAttribute("class", "title-option");
@@ -101,7 +95,7 @@ function createChildBlock() {
   const childBlock = document.createElement("div");
   const blockId = randomBytes(8).toString("hex");
   childBlock.setAttribute("id", blockId);
-  childBlock.setAttribute("draggable", "true");
+  // childBlock.setAttribute("draggable", "true");
 
   const menuContainer = document.createElement("div");
 
@@ -181,6 +175,7 @@ function findChildBlock(initDiv: HTMLElement) {
     targetElement.ondragover = handleDraggingOverEvent;
     targetElement.ondragenter = handleDraggingEnterEvent;
     targets.push({ id: targetElement.id, element: targetElement, index: i });
+    console.log(targetElement);
   }
   return targets;
 }
@@ -189,11 +184,11 @@ function handleStartDraggingEvent(ev: DragEvent) {
   const target = ev.target as HTMLElement;
   var dataTransfer = ev.dataTransfer;
   if (!dataTransfer) return;
-  dataTransfer.setData("text/plain", target.id);
+  dataTransfer.setData("text/plain", target.parentElement?.id!);
 }
 function handleDraggingEnterEvent(ev: DragEvent) {
   const target = ev.target as HTMLElement; //target: drag중인 요소
-  if (target.id === ev.dataTransfer!.getData("text/plain")) {
+  if (target.parentElement?.id! === ev.dataTransfer!.getData("text/plain")) {
     //dataTransfer: drag중인 요소가 호버중인 대상
     return;
   }
@@ -208,7 +203,7 @@ function dropping(initDiv: HTMLElement, targets: DragTarget[]) {
     const target = ev.target as HTMLElement;
     const dragTargetId = ev.dataTransfer!.getData("text/plain");
 
-    const dropped = targets.find((t) => t.id === target.id);
+    const dropped = targets.find((t) => t.id === target.parentElement?.id!);
     const dragged = targets.find((t) => t.id == dragTargetId);
     if (dropped == null || dragged == null) {
       return;
