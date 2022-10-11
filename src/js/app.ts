@@ -19,7 +19,7 @@ function main() {
     dragIcon.setAttribute("draggable", "true");
     childBlock.appendChild(dragIcon);
     childBlock.addEventListener("mouseleave", () => {
-      childBlock.removeChild(dragIcon);
+      dragIcon.parentNode?.removeChild(dragIcon);
     });
   });
 
@@ -37,7 +37,7 @@ function main() {
         dragIcon.setAttribute("draggable", "true");
         childBlock.appendChild(dragIcon);
         childBlock.addEventListener("mouseleave", () => {
-          childBlock.removeChild(dragIcon);
+          dragIcon.parentNode?.removeChild(dragIcon);
         });
       });
 
@@ -85,9 +85,12 @@ function showTitleOptions() {
   titleOptionBlock[0].appendChild(addCommentButton);
   const title = document.getElementsByClassName("title");
   title[0]?.addEventListener("mouseleave", () => {
-    titleOptionBlock[0].removeChild(addIconButton);
-    titleOptionBlock[0].removeChild(addCoverButton);
-    titleOptionBlock[0].removeChild(addCommentButton);
+    // titleOptionBlock[0].removeChild(addIconButton);
+    addIconButton.parentNode?.removeChild(addIconButton);
+    // titleOptionBlock[0].removeChild(addCoverButton);
+    addCoverButton.parentNode?.removeChild(addCoverButton);
+    // titleOptionBlock[0].removeChild(addCommentButton);
+    addCommentButton.parentNode?.removeChild(addCommentButton);
   });
 }
 
