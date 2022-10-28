@@ -70,11 +70,14 @@ body {
 .drag-icon {
   width: 20px;
   height: 20px;
-  /* position: relative; */
+  cursor: pointer;
   position: relative;
   right: 17px;
   bottom: 26px;
-  cursor: pointer;
+  /* position: relative;
+  z-index: 2;
+  bottom: 27px;
+  left: -12px; */
 }
 
 .block {
@@ -90,6 +93,8 @@ body {
 }
 
 .block-input {
+  /* position: relative;
+  z-index: 1; */
   width: 100%;
   height: auto;
   padding: 0.5rem 0.5rem;

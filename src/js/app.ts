@@ -52,11 +52,11 @@ function main() {
       // 1. childBlock들의 id로 배열 만들어
       const blockIdArr = new Array(childBlock.getAttribute("id"));
       // 2. 그 배열에서, 현재 포커스의 id의 인덱스값 확인 후
-      const currentId = document.activeElement?.getAttribute("id");
-      // const currentIndex = blockIdArr.indexOf(currentId);
+      const currentId = document.activeElement?.getAttribute("id") || null
+      const currentIndex = blockIdArr.indexOf(currentId);
       // 3. +1인덱스 요소로 포커스 이동
-      // currentIndex+1.focus();
-      console.log("ARROW DOWN!", blockIdArr, currentId);
+      // blockIdArr.findIn(currentIndex+1).focus();
+      console.log("ARROW DOWN!", blockIdArr, currentId, currentIndex);
     }
     // 위 방향키: 현재 포커스의 id의 인덱스보다 -1인덱스 요소로 포커스 이동
     if ((e as KeyboardEvent).key === "ArrowUp") {
@@ -85,11 +85,8 @@ function showTitleOptions() {
   titleOptionBlock[0].appendChild(addCommentButton);
   const title = document.getElementsByClassName("title");
   title[0]?.addEventListener("mouseleave", () => {
-    // titleOptionBlock[0].removeChild(addIconButton);
     addIconButton.parentNode?.removeChild(addIconButton);
-    // titleOptionBlock[0].removeChild(addCoverButton);
     addCoverButton.parentNode?.removeChild(addCoverButton);
-    // titleOptionBlock[0].removeChild(addCommentButton);
     addCommentButton.parentNode?.removeChild(addCommentButton);
   });
 }
